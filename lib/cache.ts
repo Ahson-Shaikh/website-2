@@ -65,6 +65,15 @@ export async function getLatestRelease(): Promise<GitHubRelease> {
 }
 
 /**
+ * Get a published release by its exact tag, including prereleases.
+ */
+export async function getReleaseByTag(tag: string): Promise<GitHubRelease> {
+  return cachedFetch<GitHubRelease>(
+    `${GITHUB_API}/repos/GopeedLab/gopeed/releases/tags/${encodeURIComponent(tag)}`,
+  );
+}
+
+/**
  * Get published releases from GitHub, including prereleases.
  */
 export async function getReleases(perPage = 10): Promise<GitHubRelease[]> {
